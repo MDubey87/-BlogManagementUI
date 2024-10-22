@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.right-margin {
+    margin-right: 10px;
+}
+
+.top-margin {
+    margin-top: 10px;
+}

@@ -1,0 +1,31 @@
+<app-load-spinner [showSpinner]="showSpinner"></app-load-spinner>
+<div>
+    <a routerLink="/create" class="btn btn-dark mb-3">New Post</a>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+    Service is unavaliable. Please try again later.
+</div>
+<div *ngIf="blogs !== undefined && !showErrorMessage">
+    <div *ngIf="blogs.length === 0" class="alert alert-info" role="alert">
+        No blog is avaliable.
+    </div>
+    <div class="card top-margin" *ngFor="let blog of blogs">
+        <div class="card-body">
+            <p>{{blog.content}}</p>
+        </div>
+        <div class="card-footer text-body-secondary">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">Created By : {{blog.userName}}</div>
+                        <div class="col">Created Date : {{blog.dateCreated}}</div>
+                    </div>
+                </div>
+                <div class="col text-end">
+                    <a routerLink="/edit/{{blog.id}}" class="btn btn-primary right-margin">Edit</a>
+                    <a href="javascript:void(0)" class="btn btn-secondary" (click)="onDelete(blog.id)">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

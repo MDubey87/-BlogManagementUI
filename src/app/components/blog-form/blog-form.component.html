@@ -1,0 +1,57 @@
+<app-load-spinner [showSpinner]="showSpinner"></app-load-spinner>
+<div class="alert alert-danger" role="alert" *ngIf="submitted && showErrorMessage">
+    Service is unavaliable. Please try again later.
+</div>
+<div class="alert alert-success" role="alert" *ngIf="submitted && showSuccessMessage">
+    <p *ngIf="blogId === '';else other_content">Blog Posted Successfully.</p>
+    <ng-template #other_content>
+        <p>Blog Updated Successfully.</p>
+    </ng-template>
+
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+        <div class="col-9">
+            <label for="inputUserName" class="col-sm-2 col-form-label">User Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputUserName" autocomplete="off" formControlName="userName"
+                    [ngClass]="{ 'is-invalid': submitted && formControls['userName'].invalid }">
+                <div *ngIf="submitted && formControls['userName'].invalid" class="invalid-feedback">
+                    User name is required
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-9">
+            <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="inputDate" formControlName="date"
+                    [ngClass]="{ 'is-invalid': submitted && formControls['date'].invalid }">
+                <div *ngIf="submitted && formControls['date'].invalid" class="invalid-feedback">
+                    Date is required
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-9">
+            <label for="inputContent" class="col-sm-2 col-form-label">Post Content</label>
+            <div class="col-sm-10">
+                <textarea id="w3review" name="w3review" rows="4" cols="50" class="form-control" id="inputContent"
+                    formControlName="content"
+                    [ngClass]="{ 'is-invalid': submitted && formControls['content'].invalid }"></textarea>
+                <div *ngIf="submitted && formControls['content'].invalid" class="invalid-feedback">
+                    Post content is required
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <button type="submit" class="btn btn-primary right-margin">Submit</button>
+            <button class="btn btn-secondary right-margin" type="reset" (click)="onReset()">Reset</button>
+            <a routerLink="/" class="btn btn-dark">Go to Home</a>
+        </div>
+    </div>
+</form>
