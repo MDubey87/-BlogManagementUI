@@ -9,6 +9,7 @@ import { IBlog } from '../../models/blog.model';
 })
 export class BlogComponent implements OnInit {
   blogs!: Array<IBlog>;
+  pageOfItems: Array<any> = [];
   showErrorMessage = false;
   showSpinner = false;
   constructor(
@@ -43,10 +44,13 @@ export class BlogComponent implements OnInit {
         this.blogs = this.blogs.filter((blog) => blog.id !== blogId);
         this.showSpinner = false;
       },
-      error: (error: any) => {
+      error: () => {
         this.showSpinner = false;
         this.showErrorMessage = true;
       },
     });
+  }
+  onPageChange(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
   }
 }
